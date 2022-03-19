@@ -1,11 +1,12 @@
+package sa.assertj;
+
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class Experiment {
+public abstract class Experiment {
 
     private DataProvider provider;
     private AssertionRunner runner;
@@ -28,7 +29,7 @@ abstract class Experiment {
     }
 
     public void writeResults(PrintWriter writer) {
-        writer.println("sample,time(ms)");
+        writer.println("sample,time(ns)");
         for (int i=0; i < results.size(); i++) {
             writer.println("%d,%d".formatted(i, results.get(i)));
         }
@@ -42,18 +43,20 @@ abstract class Experiment {
     public void writeResults(String path) throws IOException {
         writeResults(new File(path));
     }
+
+    @FunctionalInterface
+    public interface DataProvider {
+        Object[][] generate(int size, int numOfSamples);
+    }
+
+    @FunctionalInterface
+    public interface AssertionRunner {
+        void run(Object[] data);
+    }
 }
 
 
-@FunctionalInterface
-interface DataProvider {
-    Object[][] generate(int size, int numOfSamples);
-}
 
-@FunctionalInterface
-interface AssertionRunner {
-    void run(Object[] data);
-}
 
 
 

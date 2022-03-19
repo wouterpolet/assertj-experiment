@@ -1,3 +1,7 @@
+package sa.assertj.maps;
+
+import sa.assertj.Experiment;
+
 import java.nio.charset.Charset;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -7,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ContainsExactly extends Experiment {
 
-    static DataProvider provider = (size, numOfSamples) -> {
+    static Experiment.DataProvider provider = (size, numOfSamples) -> {
         Object[][] result = new Object[numOfSamples][];
         for (int s=0; s < numOfSamples; s++) {
             Map<String, String> actual = new LinkedHashMap<>();

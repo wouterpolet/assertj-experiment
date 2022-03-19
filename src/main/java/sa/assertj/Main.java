@@ -1,3 +1,7 @@
+package sa.assertj;
+
+import sa.assertj.maps.ContainsExactly;
+
 import java.io.IOException;
 
 public class Main {
@@ -10,6 +14,5 @@ public class Main {
             System.out.println("F writing to the file :(");
             e.printStackTrace();
         }
-
     }
 }
