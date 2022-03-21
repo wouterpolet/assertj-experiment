@@ -1,0 +1,56 @@
+- allMatch(Predicate<Integer> predicate)
+- allSatisfy(Consumer<Integer> consumer)
+- anyMatch(Predicate<Integer> predicate)
+- anySatisfy(Consumer<Integer> consumer)
+- are(Condition<Integer> condition)
+- areAtLeast(int times, Condition<Integer> condition)
+- areAtLeastOne(Condition<Integer> condition)
+- areAtMost(int times, Condition<Integer> condition)
+- areExactly(int times, Condition<Integer> condition)
+- areNot(Condition<Integer> condition)
+- contains(Integer... values)
+- containsAll(Iterable<Integer> other)
+- containsAnyElementsOf(Iterable<Integer> other)
+- containsAnyOf(Integer... values)
+- containsExactly(Integer... values) -> no size, just one element in each Iterable
+- containsExactlyInAnyOrder(Integer... values) -> no size, just one element in each Iterable
+- containsExactlyInAnyOrderElementsOf(Iterable<Integer> other)
+- containsNull()
+- containsOnly(Integer... values)
+- containsOnlyNulls(Integer... values)
+- containsOnlyOnce(Integer... values)
+- containsSequence(Iterable<Integer> other)
+- containsSubsequence(Iterable<Integer> other)
+- doesNotContain(Integer... values)
+- doesNotContainAnyElementsOf(Iterable<Integer> other)
+- doesNotContainNull()
+- doesNotContainSequence(Iterable<Integer> other)
+- doesNotContainSubsequence(Iterable<Integer> other)
+- doesNotHaveAnyElementsOfTypes
+- doesNotHaveDuplicates()
+- endsWith(Integer first, Integer... rest)
+- hasAtLeastOneElementOfType
+- hasExactlyElementsOfTypes(Class<?>... types -> no size, just one element in a list
+- hasOnlyElementsOfType 
+- hasOnlyElementsOfTypes
+- hasSameSizeAs(Iterable<?> other)
+- hasSize(int size)
+- hasSizeBetween(int lower_bound, int upper_bound)
+- hasSizeGreaterThan(int bound)
+- hasSizeGreaterThanOrEqualTo(int bound)
+- hasSizeLessThan(int bound)
+- hasSizeLessThanOrEqualTo(int bound)
+- have(Condition<Integer> condition)
+- haveAtLeast(int n, Condition<Integer>)
+- haveAtLeastOne(Condition<Integer>)
+- haveAtMost(int n, Condition<Integer>)
+- haveExactly(int n, Condition<Integer>)
+- isEmpty() -> no size, just an empty array
+- isNotEmpty()
+- isNullOrEmpty() -> no size, just an empty array or null
+- isSubsetOf(Iterable<Integer> other)
+- noneSatisfy(Consumer<Integer> restriction)
+- satisfiesExactly(Consumer<Integer>... restrictions) -> no size, just one element in a list
+- satisfiesExactlyInAnyOrder
+- startsWith(Integer... sequence)
+- zipSatisfy(Iterable<Integer> other, BiConsumer<Integer, Integer>)
