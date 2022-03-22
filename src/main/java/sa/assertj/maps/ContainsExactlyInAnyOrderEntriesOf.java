@@ -3,8 +3,7 @@ package sa.assertj.maps;
 import sa.assertj.Experiment;
 import sa.assertj.Util;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,19 +15,25 @@ public class ContainsExactlyInAnyOrderEntriesOf extends Experiment {
             Map<String, String> actual = new LinkedHashMap<>();
             Map<String, String> expected = new LinkedHashMap<>();
             for (int i=0; i < size; i++) {
-                String key = Util.randomString(10);
+                String key = Util.randomString(Util.STRING_LENGTH);
 
                 if (actual.containsKey(key)) {
                     i--;
                     continue;
                 }
 
-                String value = Util.randomString(10);
+                String value = Util.randomString(Util.STRING_LENGTH);
 
                 actual.put(key, value);
                 expected.put(key, value);
             }
-            result[s] = new Object[] {actual, expected};
+            List<Map.Entry<String, String>> entries = new ArrayList<>(expected.entrySet());
+            Collections.shuffle(entries);
+            Map<String, String> e = new LinkedHashMap<>();
+            for (Map.Entry<String, String> entry : entries) {
+                e.put(entry.getKey(), entry.getValue());
+            }
+            result[s] = new Object[] {actual, e};
         }
         return result;
     };

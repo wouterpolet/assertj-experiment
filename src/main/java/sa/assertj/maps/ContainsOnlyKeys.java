@@ -3,8 +3,7 @@ package sa.assertj.maps;
 import sa.assertj.Experiment;
 import sa.assertj.Util;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,21 +13,22 @@ public class ContainsOnlyKeys extends Experiment {
         Object[][] result = new Object[numOfSamples][];
         for (int s=0; s < numOfSamples; s++) {
             Map<String, String> actual = new LinkedHashMap<>();
-            String[] expected = new String[size];
+            List<String> expected = new ArrayList<>();
             for (int i=0; i < size; i++) {
-                String key = Util.randomString(10);
+                String key = Util.randomString(Util.STRING_LENGTH);
 
                 if (actual.containsKey(key)) {
                     i--;
                     continue;
                 }
 
-                String value = Util.randomString(10);
+                String value = Util.randomString(Util.STRING_LENGTH);
 
                 actual.put(key, value);
-                expected[i] = key;
+                expected.add(key);
             }
-            result[s] = new Object[] {actual, expected};
+            Collections.shuffle(expected);
+            result[s] = new Object[] {actual, expected.toArray(new String[0])};
         }
         return result;
     };

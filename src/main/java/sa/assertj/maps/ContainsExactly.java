@@ -16,14 +16,14 @@ public class ContainsExactly extends Experiment {
             Map<String, String> actual = new LinkedHashMap<>();
             Map.Entry[] expected = new Map.Entry[size];
             for (int i=0; i < size; i++) {
-                String key = Util.randomString(10);
+                String key = Util.randomString(Util.STRING_LENGTH);
 
                 if (actual.containsKey(key)) {
                     i--;
                     continue;
                 }
 
-                String value = Util.randomString(10);
+                String value = Util.randomString(Util.STRING_LENGTH);
 
                 actual.put(key, value);
                 expected[i] = Map.entry(key, value);

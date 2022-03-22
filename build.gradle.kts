@@ -2,6 +2,12 @@ plugins {
     java
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
 group = "org.example"
 version = "1.0-SNAPSHOT"
 
