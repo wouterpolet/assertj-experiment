@@ -19,8 +19,8 @@ public abstract class Experiment {
     }
 
     public void run(int size, int numOfSamples) {
-        Object[][] data = provider.generate(size, numOfSamples);
-        for (Object[] sample : data) {
+        for (int i=0; i < numOfSamples; i++) {
+            Object[] sample = provider.generate(size);
             long startTime = System.nanoTime();
             runner.run(sample);
             long endTime = System.nanoTime();
@@ -56,7 +56,7 @@ public abstract class Experiment {
 
     @FunctionalInterface
     public interface DataProvider {
-        Object[][] generate(int size, int numOfSamples);
+        Object[] generate(int size);
     }
 
     @FunctionalInterface

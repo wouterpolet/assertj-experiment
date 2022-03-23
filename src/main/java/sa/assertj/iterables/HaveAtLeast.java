@@ -4,31 +4,26 @@ import org.assertj.core.api.Condition;
 import sa.assertj.Experiment;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static sa.assertj.Util.r;
 
 public class HaveAtLeast extends Experiment {
-    static DataProvider provider = (size, numOfSamples) -> {
-        Object[][] result = new Object[numOfSamples][];
-        for (int i = 0; i < numOfSamples; i++) {
-            ArrayList<Integer> list = new ArrayList<>();
-            Random random = new Random();
-            int negative_times = 0;
-            for (int j = 0; j < size; j++) {
-                if (random.nextBoolean()) {
-                    list.add(-(random.nextInt(Integer.MAX_VALUE) + 1));
-                    negative_times++;
-                } else {
-                    list.add(random.nextInt(Integer.MAX_VALUE));
-                }
+    static DataProvider provider = (size) -> {
+        ArrayList<Integer> list = new ArrayList<>();
+        int negative_times = 0;
+        for (int j = 0; j < size; j++) {
+            if (r.nextBoolean()) {
+                list.add(-(r.nextInt(Integer.MAX_VALUE) + 1));
+                negative_times++;
+            } else {
+                list.add(r.nextInt(Integer.MAX_VALUE));
             }
-
-            Condition<Integer> condition = new Condition<>(s -> s < 0, "less than zero");
-
-            result[i] = new Object[] { list, negative_times - random.nextInt(negative_times), condition };
         }
-        return result;
+
+        Condition<Integer> condition = new Condition<>(s -> s < 0, "less than zero");
+
+        return new Object[]{list, negative_times - r.nextInt(negative_times), condition};
     };
 
     static AssertionRunner runner = s -> assertThat((ArrayList<Integer>) s[0]).haveAtLeast((int) s[1], (Condition<Integer>) s[2]);

@@ -4,30 +4,25 @@ import sa.assertj.Experiment;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static sa.assertj.Util.r;
 
 public class ContainsAnyElementsOf extends Experiment {
-    static Experiment.DataProvider provider = (size, numOfSamples) -> {
-        Object[][] result = new Object[numOfSamples][];
-        for (int i = 0; i < numOfSamples; i++) {
-            ArrayList<Integer> list1 = new ArrayList<>();
-            ArrayList<Integer> list2 = new ArrayList<>();
-            Random random = new Random();
-            int element = random.nextInt();
-            list1.add(element);
-            list2.add(element);
-            for (int j = 1; j < size; j++) {
-                list1.add(random.nextInt());
-                list2.add(random.nextInt());
-            }
-
-            Collections.shuffle(list1);
-            Collections.shuffle(list2);
-            result[i] = new Object[] { list1, list2 };
+    static Experiment.DataProvider provider = (size) -> {
+        ArrayList<Integer> list1 = new ArrayList<>();
+        ArrayList<Integer> list2 = new ArrayList<>();
+        int element = r.nextInt();
+        list1.add(element);
+        list2.add(element);
+        for (int j = 1; j < size; j++) {
+            list1.add(r.nextInt());
+            list2.add(r.nextInt());
         }
-        return result;
+
+        Collections.shuffle(list1);
+        Collections.shuffle(list2);
+        return new Object[]{list1, list2};
     };
 
     static Experiment.AssertionRunner runner = s -> assertThat((ArrayList<Integer>) s[0]).containsAnyElementsOf((ArrayList<Integer>) s[1]);

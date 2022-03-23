@@ -11,19 +11,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class IsStrictlyBetween extends Experiment {
 
-    static DataProvider provider = (size, numOfSamples) -> {
-        Object[][] result = new Object[numOfSamples][];
-        for (int s=0; s < numOfSamples; s++) {
-            List<String> testcase = new ArrayList<>();
-            for (int i = 0; i < 3; i++) {
-                String gen = Util.randomString(size);
-                if (testcase.contains(gen)) i--;
-                else testcase.add(gen);
-            }
-            Collections.sort(testcase);
-            result[s] = testcase.toArray();
+    static DataProvider provider = (size) -> {
+        List<String> testcase = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            String gen = Util.randomString(size);
+            if (testcase.contains(gen)) i--;
+            else testcase.add(gen);
         }
-        return result;
+        Collections.sort(testcase);
+        return testcase.toArray();
     };
 
     static AssertionRunner runner = s -> assertThat((String) s[1]).isStrictlyBetween((String) s[0], (String) s[2]);

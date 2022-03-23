@@ -13,26 +13,22 @@ import static sa.assertj.Util.r;
 
 public class ContainsValue extends Experiment {
 
-    static DataProvider provider = (size, numOfSamples) -> {
-        Object[][] result = new Object[numOfSamples][];
-        for (int s=0; s < numOfSamples; s++) {
-            Map<String, String> actual = new LinkedHashMap<>();
-            for (int i=0; i < size; i++) {
-                String key = Util.randomString(Util.STRING_LENGTH);
+    static DataProvider provider = (size) -> {
+        Map<String, String> actual = new LinkedHashMap<>();
+        for (int i = 0; i < size; i++) {
+            String key = Util.randomString(Util.STRING_LENGTH);
 
-                if (actual.containsKey(key)) {
-                    i--;
-                    continue;
-                }
-
-                String value = Util.randomString(Util.STRING_LENGTH);
-
-                actual.put(key, value);
+            if (actual.containsKey(key)) {
+                i--;
+                continue;
             }
-            List<String> values = new ArrayList<>(actual.values());
-            result[s] = new Object[] {actual, values.get(r.nextInt(values.size()))};
+
+            String value = Util.randomString(Util.STRING_LENGTH);
+
+            actual.put(key, value);
         }
-        return result;
+        List<String> values = new ArrayList<>(actual.values());
+        return new Object[]{actual, values.get(r.nextInt(values.size()))};
     };
 
     static AssertionRunner runner = s -> assertThat((Map) s[0]).containsValue(s[1]);

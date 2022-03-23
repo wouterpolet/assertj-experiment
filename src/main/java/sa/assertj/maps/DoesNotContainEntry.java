@@ -13,29 +13,25 @@ import static sa.assertj.Util.r;
 
 public class DoesNotContainEntry extends Experiment {
 
-    static DataProvider provider = (size, numOfSamples) -> {
-        Object[][] result = new Object[numOfSamples][];
-        for (int s=0; s < numOfSamples; s++) {
-            Map<String, String> actual = new LinkedHashMap<>();
-            for (int i=0; i < size; i++) {
-                String key = Util.randomString(Util.STRING_LENGTH);
+    static DataProvider provider = (size) -> {
+        Map<String, String> actual = new LinkedHashMap<>();
+        for (int i = 0; i < size; i++) {
+            String key = Util.randomString(Util.STRING_LENGTH);
 
-                if (actual.containsKey(key)) {
-                    i--;
-                    continue;
-                }
-
-                String value = Util.randomString(Util.STRING_LENGTH);
-
-                actual.put(key, value);
+            if (actual.containsKey(key)) {
+                i--;
+                continue;
             }
-            String key;
-            do {
-                key = Util.randomString(Util.STRING_LENGTH);
-            } while (actual.containsKey(key));
-            result[s] = new Object[] {actual, key, Util.randomString(Util.STRING_LENGTH)};
+
+            String value = Util.randomString(Util.STRING_LENGTH);
+
+            actual.put(key, value);
         }
-        return result;
+        String key;
+        do {
+            key = Util.randomString(Util.STRING_LENGTH);
+        } while (actual.containsKey(key));
+        return new Object[]{actual, key, Util.randomString(Util.STRING_LENGTH)};
     };
 
     static AssertionRunner runner = s -> assertThat((Map) s[0]).doesNotContainEntry(s[1], s[2]);

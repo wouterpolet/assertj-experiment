@@ -10,14 +10,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class IsBetween extends Experiment {
 
-    static DataProvider provider = (size, numOfSamples) -> {
-        Object[][] result = new Object[numOfSamples][];
-        for (int s=0; s < numOfSamples; s++) {
-            String[] testcase = new String[] {Util.randomString(size), Util.randomString(size), Util.randomString(size)};
-            Arrays.sort(testcase);
-            result[s] = testcase;
-        }
-        return result;
+    static DataProvider provider = (size) -> {
+        String[] testcase = new String[]{Util.randomString(size), Util.randomString(size), Util.randomString(size)};
+        Arrays.sort(testcase);
+        return testcase;
     };
 
     static AssertionRunner runner = s -> assertThat((String) s[1]).isBetween((String) s[0], (String) s[2]);
