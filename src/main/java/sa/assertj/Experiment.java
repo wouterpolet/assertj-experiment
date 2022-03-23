@@ -28,6 +28,16 @@ public abstract class Experiment {
         }
     }
 
+    public void printOverview() {
+        long min = Long.MAX_VALUE;
+        long max = Long.MIN_VALUE;
+        for (long result : results) {
+            min = Math.min(min, result);
+            max = Math.max(max, result);
+        }
+        System.out.println(min + " - " + max);
+    }
+
     public void writeResults(PrintWriter writer) {
         writer.println("sample,time(ns)");
         for (int i=0; i < results.size(); i++) {
