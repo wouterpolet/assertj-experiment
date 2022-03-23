@@ -12,11 +12,11 @@ public class StartsWith extends Experiment {
         Object[][] result = new Object[numOfSamples][];
         for (int i = 0; i < numOfSamples; i++) {
             ArrayList<Integer> list = new ArrayList<>();
-            Random rand = new Random();
-            int element = rand.nextInt();
+            Random random = new Random();
+            int element = random.nextInt();
             list.add(element);
             for (int j = 1; j < size; j++) {
-                list.add(rand.nextInt());
+                list.add(random.nextInt(Integer.MAX_VALUE));
             }
             result[i] = new Object[] { list, element };
         }

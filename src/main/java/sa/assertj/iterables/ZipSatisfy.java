@@ -15,14 +15,14 @@ public class ZipSatisfy extends Experiment {
         for (int i = 0; i < numOfSamples; i++) {
             ArrayList<Integer> list1 = new ArrayList<>();
             ArrayList<Integer> list2 = new ArrayList<>();
-            Random rand = new Random();
-            int element = rand.nextInt();
+            Random random = new Random();
+            int element = random.nextInt();
             for (int j = 0; j < size; j++) {
                 list1.add(element);
                 list2.add(element);
             }
 
-            BiConsumer<Integer, Integer> bi_consumer = (el1, el2) -> el1.equals(el2);
+            BiConsumer<Integer, Integer> bi_consumer = Integer::equals;
 
             result[i] = new Object[] { list1, list2, bi_consumer };
         }

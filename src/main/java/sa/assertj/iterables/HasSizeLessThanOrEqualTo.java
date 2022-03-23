@@ -12,11 +12,11 @@ public class HasSizeLessThanOrEqualTo extends Experiment{
         Object[][] result = new Object[numOfSamples][];
         for (int i = 0; i < numOfSamples; i++) {
             ArrayList<Integer> list = new ArrayList<>();
-            Random rand = new Random();
+            Random random = new Random();
             for (int j = 0; j < size; j++) {
-                list.add(rand.nextInt());
+                list.add(random.nextInt(Integer.MAX_VALUE));
             }
-            result[i] = new Object[] { list, rand.nextBoolean() ? size : size + 1};
+            result[i] = new Object[] { list, random.nextBoolean() ? size : size + 1};
         }
         return result;
     };

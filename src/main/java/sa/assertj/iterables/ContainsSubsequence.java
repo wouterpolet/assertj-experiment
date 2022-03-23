@@ -13,11 +13,13 @@ public class ContainsSubsequence extends Experiment {
         for (int i = 0; i < numOfSamples; i++) {
             ArrayList<Integer> list1 = new ArrayList<>();
             ArrayList<Integer> list2 = new ArrayList<>();
-            Random rand = new Random();
+            Random random = new Random();
             for (int j = 0; j < size; j++) {
-                int element = rand.nextInt();
+                int element = random.nextInt(Integer.MAX_VALUE);
                 list1.add(element);
-                list2.add(element);
+                if (random.nextBoolean()) {
+                    list2.add(element);
+                }
             }
             result[i] = new Object[] { list1, list2 };
         }

@@ -11,18 +11,12 @@ public class HasAtLeastOneElementOfType extends Experiment {
     static Experiment.DataProvider provider = (size, numOfSamples) -> {
         Object[][] result = new Object[numOfSamples][];
         for (int i = 0; i < numOfSamples; i++) {
-            ArrayList<Integer> list1 = new ArrayList<>();
-            ArrayList<Integer> list2 = new ArrayList<>();
-            Random rand = new Random();
+            ArrayList<Integer> list = new ArrayList<>();
+            Random random = new Random();
             for (int j = 0; j < size; j++) {
-                int element = rand.nextInt();
-                list1.add(element);
-                while (list1.contains(element)) {
-                    element = rand.nextInt();
-                }
-                list2.add(element);
+                list.add(random.nextInt(Integer.MAX_VALUE));
             }
-            result[i] = new Object[] { list1, Integer.class};
+            result[i] = new Object[] { list, Integer.class };
         }
         return result;
     };

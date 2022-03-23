@@ -5,6 +5,8 @@ import sa.assertj.Experiment;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.lang.Integer;
+import java.util.function.Predicate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,15 +15,15 @@ public class Are extends Experiment{
         Object[][] result = new Object[numOfSamples][];
         for (int i = 0; i < numOfSamples; i++) {
             ArrayList<Integer> list = new ArrayList<>();
-            Random rand = new Random();
-            int element = rand.nextInt();
+            Random random = new Random();
             for (int j = 0; j < size; j++) {
-                list.add(element);
+                list.add(random.nextInt(Integer.MAX_VALUE));
             }
 
-            Condition<Integer> condition = new Condition<>(s -> s.equals(element), "equals");
+            Predicate<Integer> predicate = (s -> s >= 0);
+            Condition<Integer> condition = new Condition<Integer>(predicate, "greater than or equal to zero");
 
-            result[i] = new Object[] { list, condition};
+            result[i] = new Object[] { list, condition };
         }
         return result;
     };

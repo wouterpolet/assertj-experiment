@@ -13,14 +13,14 @@ public class Have extends Experiment {
         Object[][] result = new Object[numOfSamples][];
         for (int i = 0; i < numOfSamples; i++) {
             ArrayList<Integer> list = new ArrayList<>();
-            Random rand = new Random();
-            int element = rand.nextInt();
+            Random random = new Random();
             for (int j = 0; j < size; j++) {
-                list.add(element);
+                list.add(random.nextInt(Integer.MAX_VALUE));
             }
-            Condition<Integer> condition = new Condition<>(s -> s.equals(element), "equals");
 
-            result[i] = new Object[] { list, condition};
+            Condition<Integer> condition = new Condition<>(s -> s >= 0, "greater than or equal to zero");
+
+            result[i] = new Object[] { list, condition };
         }
         return result;
     };

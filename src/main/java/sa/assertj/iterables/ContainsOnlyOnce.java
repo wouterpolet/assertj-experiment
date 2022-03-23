@@ -12,15 +12,13 @@ public class ContainsOnlyOnce extends Experiment {
         Object[][] result = new Object[numOfSamples][];
         for (int i = 0; i < numOfSamples; i++) {
             ArrayList<Integer> list = new ArrayList<>();
-            Random rand = new Random();
-            int element;
-            list.add(0);
-            for (int j = 1; j < size; j++) {
-                element = rand.nextInt();
-                if (element == 0) element++;
-                list.add(element);
+            Random random = new Random();
+            int negative_element = -(random.nextInt(Integer.MAX_VALUE) + 1);
+            int random_index = random.nextInt(size);
+            for (int j = 0; j < size; j++) {
+                list.add(j == random_index ? negative_element : random.nextInt(Integer.MAX_VALUE));
             }
-            result[i] = new Object[] { list, 0 };
+            result[i] = new Object[] { list, negative_element };
         }
         return result;
     };

@@ -14,14 +14,11 @@ public class NoneSatisfy extends Experiment {
         Object[][] result = new Object[numOfSamples][];
         for (int i = 0; i < numOfSamples; i++) {
             ArrayList<Integer> list = new ArrayList<>();
-            Random rand = new Random();
-            int element = 1;
+            Random random = new Random();
             for (int j = 0; j < size; j++) {
-                element = rand.nextInt();
-                if (element == 0) element++;
-                list.add(element);
+                list.add(random.nextInt(Integer.MAX_VALUE));
             }
-            Consumer<Integer> consumer = s -> assertThat(s).isEqualTo(0);
+            Consumer<Integer> consumer = s -> assertThat(s).isLessThan(0);
             result[i] = new Object[] { list, consumer };
         }
         return result;

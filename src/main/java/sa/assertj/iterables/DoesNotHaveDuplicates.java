@@ -12,11 +12,11 @@ public class DoesNotHaveDuplicates extends Experiment {
         Object[][] result = new Object[numOfSamples][];
         for (int i = 0; i < numOfSamples; i++) {
             ArrayList<Integer> list = new ArrayList<>();
-            Random rand = new Random();
+            Random random = new Random();
             for (int j = 0; j < size; j++) {
-                int element = rand.nextInt();
+                int element = random.nextInt();
                 while (list.contains(element)) {
-                    element = rand.nextInt();
+                    element = random.nextInt();
                 }
                 list.add(element);
             }

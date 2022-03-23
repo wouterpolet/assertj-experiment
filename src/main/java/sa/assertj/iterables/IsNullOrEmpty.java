@@ -10,16 +10,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class IsNullOrEmpty extends Experiment {
     static DataProvider provider = (size, numOfSamples) -> {
         Object[][] result = new Object[numOfSamples][];
-        boolean empty = true;
+        Random random = new Random();
         for (int i = 0; i < numOfSamples; i++) {
-            if (empty) {
+            if (random.nextBoolean()) {
                 result[i] = new Object[] { new ArrayList<Integer>() };
             } else {
                 result[i] = new Object[] { null };
-            }
-
-            if (i == numOfSamples/2 - 1) {
-                empty = false;
             }
         }
         return result;

@@ -12,8 +12,8 @@
 - containsAll(Iterable<Integer> other)
 - containsAnyElementsOf(Iterable<Integer> other)
 - containsAnyOf(Integer... values)
-- containsExactly(Integer... values) -> no size, just one element in each Iterable
-- containsExactlyInAnyOrder(Integer... values) -> no size, just one element in each Iterable
+- containsExactly(Integer... values)
+- containsExactlyInAnyOrder(Integer... values)
 - containsExactlyInAnyOrderElementsOf(Iterable<Integer> other)
 - containsNull()
 - containsOnly(Integer... values)
@@ -29,8 +29,8 @@
 - doesNotHaveAnyElementsOfTypes
 - doesNotHaveDuplicates()
 - endsWith(Integer first, Integer... rest)
-- hasAtLeastOneElementOfType
-- hasExactlyElementsOfTypes(Class<?>... types -> no size, just one element in a list
+- hasAtLeastOneElementOfType(Class<> type)
+- hasExactlyElementsOfTypes(Class<?>... types) 
 - hasOnlyElementsOfType 
 - hasOnlyElementsOfTypes
 - hasSameSizeAs(Iterable<?> other)
@@ -50,7 +50,7 @@
 - isNullOrEmpty() -> no size, just an empty array or null
 - isSubsetOf(Iterable<Integer> other)
 - noneSatisfy(Consumer<Integer> restriction)
-- satisfiesExactly(Consumer<Integer>... restrictions) -> no size, just one element in a list
+- satisfiesExactly(Consumer<Integer>... restrictions)
 - satisfiesExactlyInAnyOrder
 - startsWith(Integer... sequence)
 - zipSatisfy(Iterable<Integer> other, BiConsumer<Integer, Integer>)

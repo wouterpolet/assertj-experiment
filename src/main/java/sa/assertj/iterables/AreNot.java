@@ -5,6 +5,7 @@ import sa.assertj.Experiment;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.function.Predicate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,18 +14,15 @@ public class AreNot extends Experiment {
         Object[][] result = new Object[numOfSamples][];
         for (int i = 0; i < numOfSamples; i++) {
             ArrayList<Integer> list = new ArrayList<>();
-            Random rand = new Random();
+            Random random = new Random();
             for (int j = 0; j < size; j++) {
-                int element = rand.nextInt();
-                if (element == 0) {
-                    element++;
-                }
-                list.add(element);
+                list.add(random.nextInt(Integer.MAX_VALUE));
             }
 
-            Condition<Integer> condition = new Condition<>(s -> s.equals(0), "equals zero");
+            Predicate<Integer> predicate = (s -> s < 0);
+            Condition<Integer> condition = new Condition<Integer>(predicate, "less than zero");
 
-            result[i] = new Object[] { list, condition};
+            result[i] = new Object[] { list, condition };
         }
         return result;
     };

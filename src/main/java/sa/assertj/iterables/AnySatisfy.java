@@ -5,6 +5,7 @@ import sa.assertj.Experiment;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,14 +14,12 @@ public class AnySatisfy extends Experiment {
         Object[][] result = new Object[numOfSamples][];
         for (int i = 0; i < numOfSamples; i++) {
             ArrayList<Integer> list = new ArrayList<>();
-            Random rand = new Random();
-            int element = rand.nextInt();
+            Random random = new Random();
             for (int j = 0; j < size; j++) {
-                list.add(element);
+                list.add(random.nextBoolean() ? random.nextInt(Integer.MAX_VALUE) : -(random.nextInt(Integer.MAX_VALUE) + 1));
             }
 
-            Consumer<Integer> consumer = s -> s.equals(element);
-
+            Consumer<Integer> consumer = s -> assertThat(s).isGreaterThanOrEqualTo(0);
             result[i] = new Object[] { list, consumer };
         }
         return result;

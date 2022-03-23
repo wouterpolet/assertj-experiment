@@ -14,13 +14,12 @@ public class AllSatisfy extends Experiment {
         Object[][] result = new Object[numOfSamples][];
         for (int i = 0; i < numOfSamples; i++) {
             ArrayList<Integer> list = new ArrayList<>();
-            Random rand = new Random();
-            int element = rand.nextInt();
+            Random random = new Random();
             for (int j = 0; j < size; j++) {
-                list.add(element);
+                list.add(random.nextInt(Integer.MAX_VALUE));
             }
 
-            Consumer<Integer> consumer = s -> s.equals(element);
+            Consumer<Integer> consumer = s -> assertThat(s).isGreaterThanOrEqualTo(0);
 
             result[i] = new Object[] { list, consumer };
         }

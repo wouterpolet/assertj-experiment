@@ -13,15 +13,20 @@ public class HaveAtLeast extends Experiment {
         Object[][] result = new Object[numOfSamples][];
         for (int i = 0; i < numOfSamples; i++) {
             ArrayList<Integer> list = new ArrayList<>();
-            Random rand = new Random();
-            int element = rand.nextInt();
+            Random random = new Random();
+            int negative_times = 0;
             for (int j = 0; j < size; j++) {
-                list.add(element);
+                if (random.nextBoolean()) {
+                    list.add(-(random.nextInt(Integer.MAX_VALUE) + 1));
+                    negative_times++;
+                } else {
+                    list.add(random.nextInt(Integer.MAX_VALUE));
+                }
             }
 
-            Condition<Integer> condition = new Condition<>(s -> s.equals(element), "equals");
+            Condition<Integer> condition = new Condition<>(s -> s < 0, "less than zero");
 
-            result[i] = new Object[] { list, size, condition};
+            result[i] = new Object[] { list, negative_times - random.nextInt(negative_times), condition };
         }
         return result;
     };

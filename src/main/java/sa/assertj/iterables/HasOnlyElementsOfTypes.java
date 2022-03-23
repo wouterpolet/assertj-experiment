@@ -11,13 +11,12 @@ public class HasOnlyElementsOfTypes extends Experiment {
     static Experiment.DataProvider provider = (size, numOfSamples) -> {
         Object[][] result = new Object[numOfSamples][];
         for (int i = 0; i < numOfSamples; i++) {
-            ArrayList<Integer> list1 = new ArrayList<>();
-            Random rand = new Random();
+            ArrayList<Integer> list = new ArrayList<>();
+            Random random = new Random();
             for (int j = 0; j < size; j++) {
-                int element = rand.nextInt();
-                list1.add(element);
+                list.add(random.nextInt());
             }
-            result[i] = new Object[] { list1, Integer.class};
+            result[i] = new Object[] { list, Integer.class };
         }
         return result;
     };
