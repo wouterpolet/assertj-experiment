@@ -1,16 +1,13 @@
 package sa.assertj;
 
-import sa.assertj.strings.IsBase64;
-import sa.assertj.strings.IsBetween;
-import sa.assertj.strings.IsStrictlyBetween;
+import sa.assertj.iterables.*;
 
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        Experiment exp = new IsBase64();
-        exp.run(100000, 100);
-        exp.printOverview();
+        Experiment exp = new SatisfiesExactlyInAnyOrder();
+        exp.run(100, 100);
         try {
             exp.writeResults("out.csv");
         } catch (IOException e) {
