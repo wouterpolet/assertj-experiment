@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        Experiment exp = new DoesNotContainKeys();
+        Experiment exp = new DoesNotContainValue();
         exp.run(1000, 100);
         try {
             exp.writeResults("out.csv");

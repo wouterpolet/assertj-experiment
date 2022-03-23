@@ -10,11 +10,11 @@
 [x] containsValues
 [x] doesNotContain
 [x] doesNotContainKeys
-[] containsKey -> only one
-[] containsEntry -> only one
-[] doesNotContainEntry -> only one
-[] doesNotContainKey -> only one
-[] containsValue -> only one
-[] doesNotContainValue -> only one
+[x] containsKey -> only one
+[x] containsEntry -> only one
+[x] doesNotContainEntry -> only one
+[x] doesNotContainKey -> only one
+[x] containsValue -> only one
+[x] doesNotContainValue -> only one
 [] isEmpty, isNull, isNullOrEmpty -> no size
 [] two other that I don't want to do
