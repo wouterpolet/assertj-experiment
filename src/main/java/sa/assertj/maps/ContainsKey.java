@@ -3,18 +3,17 @@ package sa.assertj.maps;
 import sa.assertj.Experiment;
 import sa.assertj.Util;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static sa.assertj.Util.r;
 
-public class ContainsExactly extends Experiment {
+public class ContainsKey extends Experiment {
 
-    static Experiment.DataProvider provider = (size, numOfSamples) -> {
+    static DataProvider provider = (size, numOfSamples) -> {
         Object[][] result = new Object[numOfSamples][];
         for (int s=0; s < numOfSamples; s++) {
             Map<String, String> actual = new LinkedHashMap<>();
-            Map.Entry[] expected = new Map.Entry[size];
             for (int i=0; i < size; i++) {
                 String key = Util.randomString(Util.STRING_LENGTH);
 
@@ -26,16 +25,16 @@ public class ContainsExactly extends Experiment {
                 String value = Util.randomString(Util.STRING_LENGTH);
 
                 actual.put(key, value);
-                expected[i] = Map.entry(key, value);
             }
-            result[s] = new Object[] {actual, expected};
+            List<String> keys = new ArrayList<>(actual.keySet());
+            result[s] = new Object[] {actual, keys.get(r.nextInt(keys.size()))};
         }
         return result;
     };
 
-    static AssertionRunner runner = s -> assertThat((Map) s[0]).containsExactly((Map.Entry[]) s[1]);
+    static AssertionRunner runner = s -> assertThat((Map) s[0]).containsKey(s[1]);
 
-    public ContainsExactly() {
+    public ContainsKey() {
         super(provider, runner);
     }
 }

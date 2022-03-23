@@ -1,13 +1,13 @@
 package sa.assertj;
 
-import sa.assertj.iterables.*;
+import sa.assertj.maps.*;
 
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        Experiment exp = new SatisfiesExactlyInAnyOrder();
-        exp.run(100, 100);
+        Experiment exp = new DoesNotContainValue();
+        exp.run(1000, 100);
         try {
             exp.writeResults("out.csv");
         } catch (IOException e) {

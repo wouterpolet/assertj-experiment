@@ -3,18 +3,20 @@ package sa.assertj.maps;
 import sa.assertj.Experiment;
 import sa.assertj.Util;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static sa.assertj.Util.r;
 
-public class ContainsExactly extends Experiment {
+public class ContainsEntry extends Experiment {
 
-    static Experiment.DataProvider provider = (size, numOfSamples) -> {
+    static DataProvider provider = (size, numOfSamples) -> {
         Object[][] result = new Object[numOfSamples][];
         for (int s=0; s < numOfSamples; s++) {
             Map<String, String> actual = new LinkedHashMap<>();
-            Map.Entry[] expected = new Map.Entry[size];
             for (int i=0; i < size; i++) {
                 String key = Util.randomString(Util.STRING_LENGTH);
 
@@ -26,16 +28,17 @@ public class ContainsExactly extends Experiment {
                 String value = Util.randomString(Util.STRING_LENGTH);
 
                 actual.put(key, value);
-                expected[i] = Map.entry(key, value);
             }
-            result[s] = new Object[] {actual, expected};
+            List<Map.Entry<String, String>> entries = new ArrayList<>(actual.entrySet());
+            Map.Entry<String, String> entry = entries.get(r.nextInt(entries.size()));
+            result[s] = new Object[] {actual, entry.getKey(), entry.getValue()};
         }
         return result;
     };
 
-    static AssertionRunner runner = s -> assertThat((Map) s[0]).containsExactly((Map.Entry[]) s[1]);
+    static AssertionRunner runner = s -> assertThat((Map) s[0]).containsEntry(s[1], s[2]);
 
-    public ContainsExactly() {
+    public ContainsEntry() {
         super(provider, runner);
     }
 }
