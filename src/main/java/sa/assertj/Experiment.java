@@ -8,9 +8,9 @@ import java.util.List;
 
 public abstract class Experiment {
 
-    private DataProvider provider;
-    private AssertionRunner runner;
-    private List<Long> results;
+    private final DataProvider provider;
+    private final AssertionRunner runner;
+    private final List<Long> results;
 
     public Experiment(DataProvider provider, AssertionRunner runner) {
         this.provider = provider;
