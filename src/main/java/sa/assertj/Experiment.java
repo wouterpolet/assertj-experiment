@@ -18,12 +18,16 @@ public abstract class Experiment {
         this.results = new ArrayList<>();
     }
 
-    public void run(int size, int numOfSamples) {
+    public void run(int size, int numOfSamples, long timeLimit) {
         for (int i=0; i < numOfSamples; i++) {
             Object[] sample = provider.generate(size);
             long startTime = System.nanoTime();
             runner.run(sample);
             long endTime = System.nanoTime();
+            long time = endTime - startTime;
+            if (time > timeLimit) {
+                throw new RuntimeException("Operation took too long");
+            }
             this.results.add(endTime - startTime);
         }
     }
@@ -52,6 +56,10 @@ public abstract class Experiment {
 
     public void writeResults(String path) throws IOException {
         writeResults(new File(path));
+    }
+
+    public long getTotalTime() {
+        return results.stream().reduce(Long::sum).orElse(-1L);
     }
 
     @FunctionalInterface
