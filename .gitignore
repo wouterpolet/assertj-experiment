@@ -1,5 +1,5 @@
 build/
-*.csv
+out.csv
 .gradle/
 .idea/
 
